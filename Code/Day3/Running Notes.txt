@@ -1,0 +1,141 @@
+---TB741---
+
+---Lab requirement---
+Visual Studio Code 
+NodeJS
+Visual Studio Community Edition 2022+
+
+---Pre requisite---
+HTML
+CSS
+JS
+
+---Day1---
+Javascript is a dynamic scripting language
+
+var i = 10;
+i = 'pradeep shet';
+
+function add(a,b){
+  return a+b;
+}
+
+add(1,2);  //3
+add(1);     //NaN
+add();		//NaN
+
+undefined & null
+
+Hoisting - A process of scanning the code & moving the declaration on the top
+console.log(i); //i is not defined
+
+var a=1;
+var b='10';
+var c =  a+10 + b; //1110
+
+Typescript
+- Programming language that compiles the code to JS that to according to ES standard
+- Developed by Microsoft
+- It is a superset of javascript
+- Write code in OOP
+
+HTML - W3C
+JS - EcmaScript (ES) - Its a guidelines or rules used for scripting language
+
+NodeJS
+- A javascript runtime environment
+- Free, open-source, cross-platform
+- Tools within nodejs called as Node Package Manager (NPM)
+
+NPM
+- It helps to download or share the js/css packages from public artifactory
+- It also resolves inter dependencies
+>npm install typescript
+
+
+let - Blocked scope, doesnt support hoisting
+var - Functional / global scope, support hoisting
+
+class, inheritance, spread operator, rest operator, destructuring, generics, modules
+
+---Day2---
+Angular 
+- Its a binding framework
+- Its follows component based architecture
+- Used for creating SPA 
+
+Angular CLI
+- Its a command line interface that can help to create, build, compile, serve, create scaffhold template
+
+>npm install @angular/cli@21.0.5
+
+Creating a new project
+>ng new <projectName> --skip-install
+>cd <projectName>
+>npm install 
+>ng serve     //compile, build, spin up development server, generate js, serve
+
+Component 
+- Class + template + metadata
+- It is exported like a html tag <app-root>
+> ng g c <componentName>
+
+Decorator
+
+Class decorator
+- @Component
+- @Directive
+- @Pipe
+
+Method Decorator
+@HostListener()
+
+Field Decorator
+@Input()
+
+Flow of exection
+ main.ts > app.ts > app-firstsample >  app.html       output=main.js
+ index.html > app.html
+ 
+ Databinding
+ - Its a mechanism to bind the data values to html elements & turning user activities to trigger
+ - Types of databinding
+  Interpolation -  Component   => DOM   {{}}
+  Event binding -  Component  <= DOM    ()
+  Property binding  - Component => DOM  []
+  Two way binding    Component <=> DOM   [(ngModel)]      import FormsModule
+  signal 					Compoent <=> DOM    productsize() (input)=productSize.set($event.target.value)
+  
+  
+  Angular Signals offer a more predictable, reactive, and performant way to handle form state compared to the older ngModel–based two-way binding. 
+  No zonejs used
+  -ngModel relies on dirty checking, zone based change detection, global updates for every input event
+  -Signal enable fine grained reactivity, only update the DOM when signal is read, gain performance
+  
+---Day3---
+Directives & Control flow
+- Directives is nothing but which extends the power of html elements
+- It can change the behaviour & appearance of DOM element
+- Types of directive
+  Structural directive - Alter the DOM by adding or removing the element *ngIf, *ngFor
+  Attribute Directive- Changes the appearance of DOM element  [class], [style]
+  Component - Directive with a template 
+  Custom directive 
+  >ng g d <directiveName>
+    Inject ElementRef - This give ref object of the element where directive is applied
+
+Control Flow 
+  @for, @switch, @if 
+	
+Pipe 
+- Used to transform the bound value before diplaying
+   json, uppercase, lowercase, date, currency, percent, number
+- Creating custom pipe
+ > ng g p <PipeName>
+ 
+ 
+ Bootstrap
+ - A framework used for designing responsive UI
+ >npm install bootstrap --save
+ 
+ container, row, col, form-group, form-control, form-select, btn, table

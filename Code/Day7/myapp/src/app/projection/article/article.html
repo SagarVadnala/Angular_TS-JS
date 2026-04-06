@@ -1,0 +1,15 @@
+<p>article works!</p>
+
+<div class="alert alert-primary text-center">
+    <strong>
+        <ng-content select="header"></ng-content>
+    </strong>
+</div>
+
+<div class="alert alert-secondary">
+    <ng-content select="[abc=xyz]"></ng-content>
+</div>
+
+<div class="alert alert-warning">
+    <ng-content select="footer"></ng-content>
+</div>

@@ -1,0 +1,17 @@
+<p>pipe-sample works!</p>
+
+<p>Product ID: {{product.productId}}</p> 
+<p>Product Code: {{product.productCode}}</p>
+<p>Product Name: {{product.productName | uppercase}}</p>
+<p>Product Price: {{product.price| currency: 'INR'}}</p>
+<p>Date of Birth: {{DOB| date:'dd MMM yyyy'}}</p>
+{{product|json}}
+
+<hr/>
+
+Search Text: <input type="text" [(ngModel)]="searchText" class="form-control" />
+<ul>
+    @for (nm of names | mypipe: searchText; track $index) {
+        <li>{{nm}}</li>
+    }
+</ul>

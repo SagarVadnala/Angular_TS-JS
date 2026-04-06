@@ -1,0 +1,12 @@
+<h5>Add Customer (Parent)</h5>
+
+<div class="form-group">
+    <label>Customer Name:</label>
+    <input type="text" class="form-control" [value]="customerName()"  
+    (input)="customerName.set($event.target.value)" />
+</div>
+<button class="btn btn-primary" (click)="addCustomer()">Add Customer</button>
+
+{{customerList()|json}}
+
+<app-customer-list [customers]="customerList()" (onSelection)="readValues($event)"></app-customer-list>

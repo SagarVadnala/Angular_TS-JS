@@ -1,0 +1,71 @@
+<h4>Add Product (Model Driven)</h4>
+
+<div class="row">
+    <div class="col-lg-6">
+        <form [formGroup]="frm" (submit)="saveProduct()">
+            <div class="form-group">
+                <span>Product Id</span>
+                <input type="text" class="form-control" formControlName="productId" />
+                @if(frm.controls['productId']?.hasError('required'))
+                {
+                <span class="text-danger">Product Id is mandatory</span>
+                }
+            </div>
+            <div class="form-group">
+                <span>Product Code</span>
+                <input type="text" class="form-control" formControlName="productCode" />
+                @if(frm.controls['productCode']?.hasError('code'))
+                {
+                <span class="text-danger">Product Code should start with P</span>
+                }
+            </div>
+            <div class="form-group">
+                <span>Product Name</span>
+                <input type="text" class="form-control" formControlName="productName" />
+                @if(frm.controls['productName']?.hasError('required'))
+                {
+                <span class="text-danger">Product Name is mandatory</span>
+                }
+                @if(frm.controls['productName']?.hasError('pattern'))
+                {
+                <span class="text-danger">Product Name is Invalid</span>
+                }
+            </div>
+            <div class="form-group">
+                <span>Product Price</span>
+                <input type="text" class="form-control" formControlName="price" />
+                @if(frm.controls['price']?.hasError('pattern'))
+                {
+                <span class="text-danger">Product Price is Invalid</span>
+                }
+            </div>
+            <div formGroupName="description">
+                <h4>Description</h4>
+                <div class="form-group">
+                    <span>Short Description</span>
+                    <input type="text" class="form-control" formControlName="shortDesc" />
+                </div>
+                <div class="form-group">
+                    <span>Full Description</span>
+                    <textarea type="text" class="form-control" formControlName="fullDesc"></textarea>
+                </div>
+            </div>
+            <div formArrayName="colors">
+                <h5>Colors available</h5>
+                <input type="button" value="+" (click)="addMoreColor()" />
+                @for (item of getColors.controls; track $index) {
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" [formControlName]="$index">
+                    <button class="btn btn-outline-danger" (click)="removeColor($index)" type="button">X</button>
+                </div>
+
+                }
+            </div>
+
+            <input type="submit" value="Save Product" class="btn btn-primary" [disabled]="frm.invalid" />
+            <input type="button" value="Enable Validation" class="btn btn-info" (click)="enableValidation()" />
+            <input type="button" value="Reset" class="btn btn-dark" (click)="reset()" [disabled]="!frm.touched" />
+            <input type="button" value="Load Form Data" class="btn btn-warning" (click)="update()" />
+        </form>
+    </div>
+</div>

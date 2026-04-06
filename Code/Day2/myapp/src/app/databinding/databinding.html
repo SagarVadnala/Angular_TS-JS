@@ -1,0 +1,19 @@
+<p>databinding works!</p>
+
+<h4>Interpolation</h4>
+<p>Product Name: {{productName}}</p>
+
+<h4>Event binding</h4>
+<input type="button" value="Click" (click)="showAlert()" />
+
+<h4>Property binding</h4>
+Product Name: <input type="text" [value]="productName" />
+
+<h4>Two way binding</h4>
+<input type="text" [ngModel]="productCode" (ngModelChange)="productCode=$event"/>
+<textarea type="text" [(ngModel)]="productCode"></textarea>
+<span>{{productCode}}</span>
+
+<h4>Signal</h4>
+<input type="text" [value]="productSize()" (input)="productSize.set($event.target.value)"/>
+<span>{{productSize()}}</span>

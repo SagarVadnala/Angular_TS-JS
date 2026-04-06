@@ -1,0 +1,290 @@
+
+<style>
+  .road { padding: 1.5rem 1rem 2rem; font-family: var(--font-sans); }
+  .phase { border-radius: var(--border-radius-lg); border: 1px solid var(--color-border-tertiary); margin-bottom: 1rem; overflow: hidden; }
+  .phase-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; user-select: none; }
+  .phase-header:hover { background: var(--color-background-secondary); }
+  .badge { border-radius: 20px; font-size: 11px; font-weight: 500; padding: 2px 10px; white-space: nowrap; }
+  .phase-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+  .phase-note { font-size: 12px; color: var(--color-text-secondary); }
+  .caret { font-size: 11px; color: var(--color-text-tertiary); transition: transform .2s; }
+  .caret.open { transform: rotate(90deg); }
+  .phase-body { padding: 0 16px 14px; display: none; }
+  .phase-body.open { display: block; }
+  .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .topic { border-radius: 8px; padding: 8px 12px; border: 1px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+  .topic-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+  .topic-hint { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; }
+  .dotnet-tag { font-size: 10px; color: #0C447C; background: #E6F1FB; border-radius: 4px; padding: 1px 6px; display: inline-block; margin-top: 3px; }
+  @media (prefers-color-scheme: dark) {
+    .dotnet-tag { color: #85B7EB; background: #042C53; }
+  }
+  .phase-1 .phase-header { background: #EAF3DE; }
+  .phase-1 .badge { background: #C0DD97; color: #27500A; }
+  .phase-2 .phase-header { background: #E6F1FB; }
+  .phase-2 .badge { background: #B5D4F4; color: #0C447C; }
+  .phase-3 .phase-header { background: #EEEDFE; }
+  .phase-3 .badge { background: #CECBF6; color: #3C3489; }
+  .phase-4 .phase-header { background: #FAEEDA; }
+  .phase-4 .badge { background: #FAC775; color: #633806; }
+  .phase-5 .phase-header { background: #FAECE7; }
+  .phase-5 .badge { background: #F5C4B3; color: #712B13; }
+  @media (prefers-color-scheme: dark) {
+    .phase-1 .phase-header { background: #173404; }
+    .phase-1 .badge { background: #3B6D11; color: #C0DD97; }
+    .phase-2 .phase-header { background: #042C53; }
+    .phase-2 .badge { background: #185FA5; color: #B5D4F4; }
+    .phase-3 .phase-header { background: #26215C; }
+    .phase-3 .badge { background: #534AB7; color: #CECBF6; }
+    .phase-4 .phase-header { background: #412402; }
+    .phase-4 .badge { background: #854F0B; color: #FAC775; }
+    .phase-5 .phase-header { background: #4A1B0C; }
+    .phase-5 .badge { background: #993C1D; color: #F5C4B3; }
+  }
+  .resource-bar { margin-top: 12px; padding: 8px 12px; background: var(--color-background-secondary); border-radius: 8px; font-size: 12px; color: var(--color-text-secondary); border-left: 3px solid var(--color-border-secondary); }
+  .progress-row { display: flex; gap: 6px; margin-bottom: 12px; }
+  .prog-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--color-border-tertiary); }
+  .prog-dot.done { background: #639922; }
+</style>
+<div class="road">
+  <div style="margin-bottom:14px">
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:6px">Click each phase to expand topics</div>
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="phase phase-1">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="badge">Phase 1</span>
+      <span class="phase-title">JavaScript & TypeScript Foundations</span>
+      <span class="phase-note">~2–3 weeks</span>
+      <span class="caret">▶</span>
+    </div>
+    <div class="phase-body">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Start here — Angular is written in TypeScript. Think of it as C# for the browser.</div>
+      <div class="topic-grid">
+        <div class="topic">
+          <div class="topic-name">JS Basics</div>
+          <div class="topic-hint">Variables (let/const), arrays, objects, loops, functions</div>
+          <span class="dotnet-tag">like C# basics</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">ES6+ Features</div>
+          <div class="topic-hint">Arrow functions, destructuring, spread, template literals, modules</div>
+          <span class="dotnet-tag">like LINQ & lambda</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Async JS</div>
+          <div class="topic-hint">Promises, async/await, callbacks, fetch API</div>
+          <span class="dotnet-tag">like Task/await in C#</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">TypeScript Core</div>
+          <div class="topic-hint">Types, interfaces, classes, generics, enums, decorators</div>
+          <span class="dotnet-tag">very similar to C#</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">TypeScript Advanced</div>
+          <div class="topic-hint">Union types, type guards, utility types (Partial, Readonly, Pick)</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">DOM Basics</div>
+          <div class="topic-hint">How browsers render HTML, event handling, the document tree</div>
+        </div>
+      </div>
+      <div class="resource-bar">📚 Best resources: <strong>JavaScript.info</strong> (free, excellent), <strong>TypeScript Handbook</strong> at typescriptlang.org</div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase phase-2">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="badge">Phase 2</span>
+      <span class="phase-title">Angular Core Concepts</span>
+      <span class="phase-note">~3–4 weeks</span>
+      <span class="caret">▶</span>
+    </div>
+    <div class="phase-body">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">The building blocks of every Angular app. This is where it clicks for .NET devs.</div>
+      <div class="topic-grid">
+        <div class="topic">
+          <div class="topic-name">Angular CLI</div>
+          <div class="topic-hint">ng new, ng serve, ng generate — like dotnet CLI</div>
+          <span class="dotnet-tag">like dotnet CLI</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Components</div>
+          <div class="topic-hint">Creating, structuring, and nesting components with @Component decorator</div>
+          <span class="dotnet-tag">like ASP.NET views + controllers</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Templates & Directives</div>
+          <div class="topic-hint">ngIf, ngFor, ngSwitch, ngClass, ngStyle, template syntax</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Data Binding</div>
+          <div class="topic-hint">One-way [property], event (event), two-way [(ngModel)], interpolation {{ }}</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Modules (NgModules)</div>
+          <div class="topic-hint">AppModule, feature modules, imports, declarations, exports</div>
+          <span class="dotnet-tag">like C# namespaces/assemblies</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Component Lifecycle</div>
+          <div class="topic-hint">ngOnInit, ngOnChanges, ngOnDestroy, and when to use each</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Input & Output</div>
+          <div class="topic-hint">@Input() and @Output() for parent-child communication</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Pipes</div>
+          <div class="topic-hint">Built-in pipes (date, currency, uppercase) and creating custom pipes</div>
+        </div>
+      </div>
+      <div class="resource-bar">📚 Best resource: <strong>Official Angular Tour of Heroes</strong> tutorial at angular.io — do it top to bottom</div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase phase-3">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="badge">Phase 3</span>
+      <span class="phase-title">Services, DI & HTTP</span>
+      <span class="phase-note">~2–3 weeks</span>
+      <span class="caret">▶</span>
+    </div>
+    <div class="phase-body">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">This is where your .NET background gives you a huge advantage — DI is nearly identical.</div>
+      <div class="topic-grid">
+        <div class="topic">
+          <div class="topic-name">Dependency Injection</div>
+          <div class="topic-hint">providedIn root/module, injector hierarchy, DI tokens</div>
+          <span class="dotnet-tag">nearly identical to .NET DI</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Services</div>
+          <div class="topic-hint">@Injectable, creating services, singleton vs scoped instances</div>
+          <span class="dotnet-tag">like .NET services / repositories</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">HttpClient</div>
+          <div class="topic-hint">GET, POST, PUT, DELETE calls to REST APIs, request/response typing</div>
+          <span class="dotnet-tag">like HttpClient in .NET</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">RxJS Basics</div>
+          <div class="topic-hint">Observables, subscribe(), pipe(), map, filter, switchMap</div>
+          <span class="dotnet-tag">like IObservable / LINQ + async</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Error Handling</div>
+          <div class="topic-hint">catchError, throwError, HTTP interceptors for global error handling</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Interceptors</div>
+          <div class="topic-hint">HTTP interceptors for auth headers, logging, retries</div>
+          <span class="dotnet-tag">like ASP.NET middleware</span>
+        </div>
+      </div>
+      <div class="resource-bar">📚 Best resource: <strong>RxJS.dev</strong> guide + Fireship's "RxJS Top 10 Operators" on YouTube</div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase phase-4">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="badge">Phase 4</span>
+      <span class="phase-title">Routing, Forms & State</span>
+      <span class="phase-note">~2–3 weeks</span>
+      <span class="caret">▶</span>
+    </div>
+    <div class="phase-body">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Build real apps that navigate between pages and handle complex forms.</div>
+      <div class="topic-grid">
+        <div class="topic">
+          <div class="topic-name">Angular Router</div>
+          <div class="topic-hint">RouterModule, routes config, routerLink, ActivatedRoute, query params</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Route Guards</div>
+          <div class="topic-hint">CanActivate, CanDeactivate, Resolve — protect routes</div>
+          <span class="dotnet-tag">like ASP.NET authorization filters</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Lazy Loading</div>
+          <div class="topic-hint">Load feature modules on demand to improve performance</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Template-Driven Forms</div>
+          <div class="topic-hint">FormsModule, ngModel, simple validation</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Reactive Forms</div>
+          <div class="topic-hint">FormBuilder, FormGroup, FormControl, Validators — more powerful</div>
+          <span class="dotnet-tag">like FluentValidation in .NET</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">State Management</div>
+          <div class="topic-hint">Services as state, BehaviorSubject, intro to NgRx (optional)</div>
+        </div>
+      </div>
+      <div class="resource-bar">📚 Reactive Forms > Template Forms for .NET devs — the explicit control feels familiar. Start there.</div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase phase-5">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="badge">Phase 5</span>
+      <span class="phase-title">Advanced & Production-Ready</span>
+      <span class="phase-note">~3–4 weeks</span>
+      <span class="caret">▶</span>
+    </div>
+    <div class="phase-body">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Level up to build scalable, production-quality Angular applications.</div>
+      <div class="topic-grid">
+        <div class="topic">
+          <div class="topic-name">Change Detection</div>
+          <div class="topic-hint">Default vs OnPush strategy, ChangeDetectorRef, performance</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Standalone Components</div>
+          <div class="topic-hint">Angular 17+ modern approach — no NgModules required</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Unit Testing</div>
+          <div class="topic-hint">Jasmine + Karma, TestBed, mocking services, component testing</div>
+          <span class="dotnet-tag">like xUnit/NUnit in .NET</span>
+        </div>
+        <div class="topic">
+          <div class="topic-name">NgRx (State)</div>
+          <div class="topic-hint">Actions, reducers, effects, selectors — Redux pattern for Angular</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Performance</div>
+          <div class="topic-hint">trackBy in ngFor, async pipe, virtual scrolling, bundle optimization</div>
+        </div>
+        <div class="topic">
+          <div class="topic-name">Angular + .NET Integration</div>
+          <div class="topic-hint">Connecting your Angular app to ASP.NET Core Web API — your sweet spot</div>
+          <span class="dotnet-tag">your biggest advantage!</span>
+        </div>
+      </div>
+      <div class="resource-bar">📚 Best resource: <strong>angular.io/guide</strong> (official docs are excellent) + <strong>ultimatecourses.com</strong> by Todd Motto</div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:var(--color-background-secondary);font-size:12px;color:var(--color-text-secondary);border:1px solid var(--color-border-tertiary)">
+    💡 <strong>Your .NET superpower:</strong> DI, strong typing, services, and REST APIs will feel very natural. RxJS is the biggest new concept — give it extra time.
+  </div>
+</div>
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const caret = header.querySelector('.caret');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  caret.classList.toggle('open', !isOpen);
+}
+</script>

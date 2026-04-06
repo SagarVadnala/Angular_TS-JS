@@ -1,0 +1,68 @@
+<p>directive-sample works!</p>
+
+<div class="row">
+    <div class="col-lg-6 col-sm-10">
+
+
+
+        <h4>*ngIf</h4>
+
+        Enter a number:<input type="text" [(ngModel)]="num1" class="form-control" />
+
+        <!-- <div *ngIf="num1%2==0;then ifblock else elseblock">
+</div>
+
+<ng-template #ifblock>
+    <b>Number is even</b>
+</ng-template>
+
+<ng-template #elseblock>
+    <p><b>Number is odd</b></p>
+</ng-template> -->
+
+        @if(num1%2==0){
+        <p><b>Number is even</b></p>
+        }
+        @else
+        {
+        <p><b>Number is odd</b></p>
+        }
+
+        <h4>For loop</h4>
+        <select [(ngModel)]="selectedColor" class="form-select">
+            @for (c of colors; track $index) {
+            <option>{{c}}</option>
+            }
+        </select>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>SrNo</th>
+                    <th>Product Id</th>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- [class.r1]="product.price != null && product.price>7000"  
+            [class.b1]="product.price != null && product.price<7000" -->
+                @for (product of products; track $index;let indx=$index;let od=$odd; let ev=$even) {
+                <tr [style.color]="selectedColor">
+                    <td>{{indx+1}}{{od}}{{ev}}</td>
+                    <td>{{product.productId}}</td>
+                    <td>{{product.productCode}}</td>
+                    <td>{{product.productName}}</td>
+                    <td>{{product.price}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <div [appMydirective]="selectedColor" myname="Pradeep Shet">This is my div content</div>
+        <span [appMydirective]="selectedColor" myname="sfsfsd">This is my span content</span>
+
+    </div>
+</div>

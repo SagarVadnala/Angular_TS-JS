@@ -1,0 +1,31 @@
+<p>unittest works!</p>
+
+
+<input type="string" placeholder="Enter Number 1" (input)="num1.set($event.target.value)" />
+<input type="text" placeholder="Enter Number 2" (input)="num2.set($event.target.value)" />
+
+<button (click)="add()">Addition</button>
+
+<h4 class="abc">Total= {{result()}}</h4>
+
+<hr />
+
+<ul>
+    @for (product of products(); track $index) {
+    <li>{{product.productId}} {{product.productName}}</li>
+    }
+</ul>
+
+<hr />
+
+<form [formGroup]="myform" (submit)="saveChanges()">
+    <div>
+        <label>Product Id</label>
+        <input type="text" formControlName="productId" />
+    </div>
+    <div>
+        <label>Product Name</label>
+        <input type="text" formControlName="productName" />
+    </div>
+    <input type="submit" value="Save" />
+</form>

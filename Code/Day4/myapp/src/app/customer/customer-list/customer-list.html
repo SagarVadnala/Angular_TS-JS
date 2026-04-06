@@ -1,0 +1,22 @@
+<h5>Customer List (Child)</h5>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Select</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (customer of customers(); track $index) {
+            <tr>
+                <td>
+                    {{customer}}
+                </td>
+                <td>
+                    <button class="btn btn-warning" (click)="selectCustomer(customer)">Select</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

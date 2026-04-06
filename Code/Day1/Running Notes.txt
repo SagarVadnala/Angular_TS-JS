@@ -1,0 +1,61 @@
+---TB741---
+
+---Lab requirement---
+Visual Studio Code 
+NodeJS
+Visual Studio Community Edition 2022+
+
+---Pre requisite---
+HTML
+CSS
+JS
+
+---Day1---
+Javascript is a dynamic scripting language
+
+var i = 10;
+i = 'pradeep shet';
+
+function add(a,b){
+  return a+b;
+}
+
+add(1,2);  //3
+add(1);     //NaN
+add();		//NaN
+
+undefined & null
+
+Hoisting - A process of scanning the code & moving the declaration on the top
+console.log(i); //i is not defined
+
+var a=1;
+var b='10';
+var c =  a+10 + b; //1110
+
+Typescript
+- Programming language that compiles the code to JS that to according to ES standard
+- Developed by Microsoft
+- It is a superset of javascript
+- Write code in OOP
+
+HTML - W3C
+JS - EcmaScript (ES) - Its a guidelines or rules used for scripting language
+
+NodeJS
+- A javascript runtime enviroment
+- Free, open-source, cross-platform
+- Tools within nodejs called as Node Package Manager (NPM)
+
+NPM
+- It helps to download or share the js/css packages from public artifactory
+- It also resolves inter dependencies
+>npm install typescript
+
+
+let - Blocked scope, doesnt support hoisting
+var - Functional / global scope, support hoisting
+
+class, inheritance, spread operator, rest operator, destructuring, generics, modules
+
+---Day2---

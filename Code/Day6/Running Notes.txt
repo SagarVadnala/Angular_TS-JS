@@ -1,0 +1,282 @@
+---TB741---
+
+---Lab requirement---
+Visual Studio Code 
+NodeJS
+Visual Studio Community Edition 2022+
+
+---Pre requisite---
+HTML
+CSS
+JS
+
+---Day1---
+Javascript is a dynamic scripting language
+
+var i = 10;
+i = 'pradeep shet';
+
+function add(a,b){
+  return a+b;
+}
+
+add(1,2);  //3
+add(1);     //NaN
+add();		//NaN
+
+undefined & null
+
+Hoisting - A process of scanning the code & moving the declaration on the top
+console.log(i); //i is not defined
+
+var a=1;
+var b='10';
+var c =  a+10 + b; //1110
+
+Typescript
+- Programming language that compiles the code to JS that to according to ES standard
+- Developed by Microsoft
+- It is a superset of javascript
+- Write code in OOP
+
+HTML - W3C
+JS - EcmaScript (ES) - Its a guidelines or rules used for scripting language
+
+NodeJS
+- A javascript runtime environment
+- Free, open-source, cross-platform
+- Tools within nodejs called as Node Package Manager (NPM)
+
+NPM
+- It helps to download or share the js/css packages from public artifactory
+- It also resolves inter dependencies
+>npm install typescript
+
+
+let - Blocked scope, doesnt support hoisting
+var - Functional / global scope, support hoisting
+
+class, inheritance, spread operator, rest operator, destructuring, generics, modules
+
+---Day2---
+Angular 
+- Its a binding framework
+- Its follows component based architecture
+- Used for creating SPA 
+
+Angular CLI
+- Its a command line interface that can help to create, build, compile, serve, create scaffhold template
+
+>npm install @angular/cli@21.0.5
+
+Creating a new project
+>ng new <projectName> --skip-install
+>cd <projectName>
+>npm install 
+>ng serve     //compile, build, spin up development server, generate js, serve
+
+Component 
+- Class + template + metadata
+- It is exported like a html tag <app-root>
+> ng g c <componentName>
+
+Decorator
+
+Class decorator
+- @Component
+- @Directive
+- @Pipe
+- @Injectable
+
+Method Decorator
+@HostListener()
+
+Field Decorator
+@Input()
+
+Flow of exection
+ main.ts > app.ts > app-firstsample >  app.html       output=main.js
+ index.html > app.html
+ 
+ Databinding
+ - Its a mechanism to bind the data values to html elements & turning user activities to trigger
+ - Types of databinding
+  Interpolation -  Component   => DOM   {{}}
+  Event binding -  Component  <= DOM    ()
+  Property binding  - Component => DOM  []
+  Two way binding    Component <=> DOM   [(ngModel)]      import FormsModule
+  signal 					Compoent <=> DOM    productsize() (input)=productSize.set($event.target.value)
+  
+  
+  Angular Signals offer a more predictable, reactive, and performant way to handle form state compared to the older ngModel–based two-way binding. 
+  No zonejs used
+  -ngModel relies on dirty checking, zone based change detection, global updates for every input event
+  -Signal enable fine grained reactivity, only update the DOM when signal is read, gain performance
+  
+---Day3---
+Directives & Control flow
+- Directives is nothing but which extends the power of html elements
+- It can change the behaviour & appearance of DOM element
+- Types of directive
+  Structural directive - Alter the DOM by adding or removing the element *ngIf, *ngFor
+  Attribute Directive- Changes the appearance of DOM element  [class], [style]
+  Component - Directive with a template 
+  Custom directive 
+  >ng g d <directiveName>
+    Inject ElementRef - This give ref object of the element where directive is applied
+
+Control Flow 
+  @for, @switch, @if 
+	
+Pipe 
+- Used to transform the bound value before diplaying
+   json, uppercase, lowercase, date, currency, percent, number
+- Creating custom pipe
+ > ng g p <PipeName>
+ 
+ 
+ Bootstrap
+ - A framework used for designing responsive UI
+ >npm install bootstrap --save
+ 
+ container, row, col, form-group, form-control, form-select, btn, table
+ 
+ 
+---Day4---
+Routing 
+- Serving a webpage / component based on requested matching url
+
+Steps to implement Routing
+- In app.config.ts, use routing service 
+    provideRouter(routes)
+- Define the routes in app.routes.ts file
+  { path: 'databinding', component: Databinding, title: 'Data binding' },
+- Add a placeholder for loading the component in app.html
+  <router-outlet></router-outlet>
+-Add a navbar and provide link to each route 
+   <a class="nav-link" routerLinkActive="highlight" [routerLink]="['/directive']">Directives</a>
+   Activate the css for the active link triggered using routerLinkActive
+
+Nesting of routes 
+
+ActivatedRoute
+- For reading route/querystring parameter
+    this.activatedRoute.queryParams.subscribe(data => {
+      this.firstName = data['firstName'];
+      this.lastName = data['lastName'];
+    })
+
+Router
+- For navigating from one component to another
+  this.router.navigate(['pipe', this.num1], {
+      queryParams:
+        { firstName: "pradeep", lastName: "shet" }
+    });
+
+Lazy loading
+- Downloading the component on demand. This improves the performance of application by reducing the initial load size
+    loadComponent: ()=> import('./directive-sample/directive-sample').then(c=>c.DirectiveSample)
+
+	
+input() 
+A reactive signal that accepts data from a parent component and updates automatically when the value changes. Define in child component
+
+output()
+A reactive signal used to emit events or data from a child component to a parent component. Define in child component
+
+---Day5---
+viewChild<ComponentName>("clist")
+
+Angular Forms
+- Template Driven
+
+- Model Driven (Reactive Forms)
+
+Form State
+pristine => dirty
+untouched => touched
+valid <=> invalid
+
+Steps to implement Template Driven forms
+- Import a module "FormsModule"
+- Design the form & provide template reference of type "ngForm" to the form 
+   <form #frm="ngForm" (submit)="saveProduct(frm)"></form>
+- Add input elements & provide name & ngModel attribute
+   <input type="text" class="form-control" name="pid"  [(ngModel)]="product.productId" />
+- Handle submit event and pass frm object to submit event 
+   (submit)="saveProduct(frm)"
+- Add validation by providing html5 attributes   (required, pattern, email, max, min, maxlength, minlength, phone)
+  <input type="text" class="form-control" name="pid"  required  [(ngModel)]="product.productId" />
+- To display error message 
+  @if(frm.controls['pid']?.errors){
+                <span class="text-danger">Product Id is mandatory</span>
+     }
+	 
+Steps to implement ModelDriven Forms
+- Import a module "ReactiveFormsModule"
+- Design the form in the ts file using FormGroup & FormBuilder
+    this.frm = this.fb.group({
+      productId: this.fb.control('', [Validators.required]),
+      productCode: this.fb.control(''),
+      productName: this.fb.control('',[Validators.required]),
+      price: this.fb.control('', [Validators.pattern('^[0-9]+$')])
+    })
+- Add input elment in the html & map the FormGroup & FormControl
+   <form [formGroup]="frm" (submit)="saveProduct()">
+            <div class="form-group">
+                <span>Product Id</span>
+                <input type="text" class="form-control" formControlName="productId" />
+- Handle submit event 
+   (submit)="saveProduct()"
+- Add validation in the ts file
+   [Validators.required]
+- To display error message 
+  @if(frm.controls['pid']?.errors){
+                <span class="text-danger">Product Id is mandatory</span>
+     } 
+	 
+---Day6---
+Services
+- Used to share the common functionalities across the components
+- By default services are singleton
+> ng g s <ServiceName>
+
+ReactiveX 
+- An API for asynchronous programming with observable streams
+- Available as Rx.Net, RxJava, RxJs
+
+Observable
+- Its a function that return stream of data values to an observer over time 
+
+Observer
+- Its a function that consumes the data values sent by observable & it notifies the subscribers
+- It has 3 callback methods
+  next()  - success callback
+  error() - failure callback
+  complete()- Indication that no more data is coming
+
+Operator
+- It takes 1 observable as input & return another observable after manipulation
+  of(), map(), filter(), retry()
+  
+Steps to implements & call API
+- Add a provider in app.config.ts
+  provideHttpClient()
+- Create a service using a cmd
+  >ng g s <serviceName>
+- Inject HttpClient class
+   httpClient = inject(HttpClient);
+- Create function in the service using httpClient that return observable
+   getProducts() {
+    return this.httpClient.get<Product[]>(`${environment.BASEURL}/api/ProductAPI/getall`)
+    .pipe(retry(2));
+  }
+- Inject the service in the component & call the functions. Also subscribe it
+   this.subscriptions.push(this.productService.getProducts().subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.products = resp;
+      }
+    }));
+	
+---Day7---

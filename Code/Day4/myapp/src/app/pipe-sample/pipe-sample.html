@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-6">
+        <p>pipe-sample works!</p>
+
+        <p>Product ID: {{product.productId}}</p>
+        <p>Product Code: {{product.productCode}}</p>
+        <p>Product Name: {{product.productName | uppercase}}</p>
+        <p>Product Price: {{product.price| currency: 'INR'}}</p>
+        <p>Date of Birth: {{DOB| date:'dd MMM yyyy'}}</p>
+        {{product|json}}
+
+        <hr />
+
+        Search Text: <input type="text" [(ngModel)]="searchText" class="form-control" />
+        <ul>
+            @for (nm of names | mypipe: searchText; track $index) {
+            <li>{{nm}}</li>
+            }
+        </ul>
+    </div>
+    <div class="col-lg-6">
+        <h4>Route Parameter: {{pId}}</h4>
+        <h4>Querystring Parameter: {{firstName}} {{lastName}}</h4>
+
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['personal']">Personal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['exp']">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['education']">Education</a>
+            </li>
+        </ul>
+        <router-outlet></router-outlet>
+    </div>
+</div>

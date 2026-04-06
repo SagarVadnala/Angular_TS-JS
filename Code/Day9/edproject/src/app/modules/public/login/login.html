@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        @if(failed == true)
+        {
+        <div class="alert alert-danger">
+            <strong>Login failed!</strong>
+        </div>
+        }
+        <form [formGroup]="loginfrm" (submit)="validateLogin()">
+            <div className="form-group">
+                <span>User Name</span>
+                <input type="text" formControlName="userName" class="form-control"
+                    [class.is-invalid]="loginfrm.controls['userName']?.errors" />
+                @if(loginfrm.controls['userName']?.errors){
+                <span class="text-danger">Username is mandatory</span>
+                }
+            </div>
+            <div className="form-group">
+                <span>Password</span>
+                <input type="password" formControlName="password" class="form-control"
+                    [class.is-invalid]="loginfrm.controls['password']?.errors" />
+                @if(loginfrm.controls['password']?.errors){
+                <span class="text-danger">Password is mandatory</span>
+                }
+            </div>
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
