@@ -1,0 +1,29 @@
+<p>data-binding works!</p>
+
+<h4>Interpolation</h4>
+
+<P>Product Name: {{ productname }}</P>
+
+
+<h4>Event binding</h4>
+<input type="button" (click)="ShowAlert()" value="Click" />
+
+
+<h4>Property Binding</h4>
+
+Product name: <input type="text" [value]="productname" >
+
+ <h4>Two way binding</h4>
+ 
+ <p> Two way bining is not suporting in new anular
+    <b> have  suport for signals </b>
+ </p>
+
+ <input type="text" [ngModel]="ProductCode"  (ngModelChange)="ProductCode=$event" />
+ <input type="text" [value]="ProductCode" />
+ <span>ProductCode: {{ProductCode}}</span>
+
+ <h1>Signals</h1>
+Product Size :<input type="text" [value]="productSize()" (input)="productSize.set($event.target.value)" />
+<samp>Size : {{productSize()}}</samp>
+  

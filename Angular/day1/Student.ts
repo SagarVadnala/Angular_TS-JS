@@ -19,3 +19,11 @@ class Student implements IStudent {
 let s = new Student();
 s.studentId = 101;
 s.ShowData();
+
+
+class ststicClass{
+    static print(){
+        console.log("This is a static method");
+    }
+}
+ststicClass.print(); // no new keyword is used to call static method
