@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class DataBinding {
 
-  productname : string = 'Angular'; 
+  productname : string = 'Angular';
 ProductCode:string = 'ANG-001';
 productSize = signal<string>("large");
 

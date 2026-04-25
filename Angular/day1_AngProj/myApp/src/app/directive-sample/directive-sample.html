@@ -1,0 +1,94 @@
+<p>directive-sample works!</p>
+
+
+Enter a num: <input type="text" [(ngModel)]="num1" />
+
+
+<div *ngIf="num1%2===0; then ifblock else elseblock"></div>
+
+<ng-template #ifblock>
+  <strong> Number is Even</strong>
+</ng-template>
+
+<ng-template #elseblock>
+  <strong>number is odd</strong>
+</ng-template>
+
+<!-- Use below one as its simple similar to razerPages -->
+@if(num1%2 ===0){
+  <strong>num Is EVEN</strong>
+}
+@else {
+
+  <strong>num Is ODD</strong>
+
+}
+
+<h4 appMydirective> *ngFor </h4>
+
+<ul>
+  @for(c of colors; track $index){
+    <li>{{c}}</li>
+  }
+</ul>
+
+<select>
+   @for(c of colors; track $index){
+    <option [value]="c">{{c}}</option>
+   }
+</select>
+
+<h1>Tabale Structure</h1>
+<table border="1">
+<thead>
+  <tr>
+    <th>SrNo</th>
+    <th>Product Id</th>
+    <th>Product Code</th>
+    <th>Product Name</th>
+    <th>Price</th>
+  </tr>
+</thead>
+<tbody>
+  <!-- for conditional coloring
+
+      <tr [class.r1] ="product.price != undefined && product.price > 2000"
+           [class.g1] ="product.price != undefined && product.price <= 2000"
+
+      -- for alternate coloring
+   <tr [class.g1] = "od" [class.b1] ="ev" >
+  -->
+
+
+    @for(product of products; track product.productId; let od=$odd; let ev=$even ){
+      <tr [style.backgroundColor]="selectedColor"  >
+          <td>{{$index + 1}}{{od}} {{ev}}</td>
+          <td>{{product.productId}}</td>
+          <td>{{product.ProductCode}}</td>
+          <td>{{product.productname}}</td>
+          <td>{{product.price}}</td>
+      </tr>
+    }
+</tbody>
+
+
+
+</table>
+
+<p> Select below dropDown to change color</p>
+<select [(ngModel)]="selectedColor" >
+   @for(c of colors; track $index){
+    <option [value]="c">{{c}}</option>
+   }
+</select>
+
+<hr>
+<div [appMydirective] = "selectedColor"> this is my DIV</div>
+<span [appMydirective] = "selectedColor"> This is my stan</span>
+
+<!-- pass parent tp child
+  to apply color to my directive
+
+  component act as parent
+-->
+
